@@ -25,11 +25,10 @@ class Ctrl_user
 		$result = Sql_user::selectUserByPass($username, $password);
 		$user = new User();
 		$resultlength = count($result);
+		// If the query for some reason returns more than one user, don't return a completed user.
 		if($resultlength == 1) {
-			// If the query for some reason returns more than one user, don't return a completed user.
-			$user->setId($result[0][Bank::DB_TABLE_USER."_id"]);
-			$user->setUsername($result[0][Bank::DB_TABLE_USER."_username"]);
-			$user->setLevel($result[0][Bank::DB_TABLE_USER."_level"]);
+			$user_id = $result[0][Bank::DB_TABLE_USER."_id"];
+			$user = self::getUserById($user_id);
 		}
 		return $user;
 	}
