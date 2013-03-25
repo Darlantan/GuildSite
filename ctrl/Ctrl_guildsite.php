@@ -318,24 +318,8 @@ class Ctrl_guildsite
 			$user = Ctrl_user::getUserById($post[Bank::SUBMIT_EDIT_USER]);
 		}
 		// Find all the rest of the tags and replace them with required content.
-		while(Ctrl_view::findTags($tmp_str, $key) !== false) {
-			switch($key) {
-				case Bank::TAG_USER_ID:
-					$replace_with = $user->getId();
-					break;
-				case Bank::TAG_FIRSTNAME:
-					$replace_with = $user->getFirstname();
-					break;
-				case Bank::TAG_LASTNAME:
-					$replace_with = $user->getLastname();
-					break;
-				case Bank::TAG_EMAIL:
-					$replace_with = $user->getEmail();
-					break;
-				case Bank::TAG_USERNAME:
-					$replace_with = $user->getUsername();
-					break;
-			}
+		while(Ctrl_view::findTags($tmp_str, $tag) !== false) {
+			$replace_with = Ctrl_view::replaceContent($tag,$user);
 			
 			$to_replace = $tag_mark.$key.$tag_mark;
 			
