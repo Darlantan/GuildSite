@@ -1,0 +1,91 @@
+/** gs_user **/
+
+CREATE TABLE `gs_user` (
+  `gs_user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `gs_user_firstname` varchar(255) NOT NULL,
+  `gs_user_lastname` varchar(255) NOT NULL,
+  `gs_user_email` varchar(255) NOT NULL,
+  `gs_user_username` varchar(255) NOT NULL,
+  `gs_user_password` varchar(25) NOT NULL,
+  `gs_user_date_of_join` datetime NOT NULL,
+  `gs_user_date_of_activation` datetime DEFAULT '0000-00-00 00:00:00',
+  `gs_user_state` int(2) NOT NULL,
+  `gs_user_level` int(2) NOT NULL,
+  PRIMARY KEY (`gs_user_id`),
+  UNIQUE KEY `gs_user_email` (`gs_user_email`),
+  UNIQUE KEY `gs_user_username` (`gs_user_username`),
+  KEY `user_id` (`gs_user_id`),
+  KEY `email` (`gs_user_email`),
+  KEY `username` (`gs_user_username`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1
+
+/** gs_layout **/
+
+CREATE TABLE `gs_layout` (
+  `gs_layout_id` int(11) NOT NULL AUTO_INCREMENT,
+  `gs_layout_str` text NOT NULL,
+  `gs_layout_right_level` int(2) NOT NULL,
+  `gs_layout_description` text NOT NULL,
+  PRIMARY KEY (`gs_layout_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1
+
+/** gs_view **/
+
+CREATE TABLE `gs_view` (
+  `gs_view_id` int(11) NOT NULL AUTO_INCREMENT,
+  `gs_view_pid` int(11) NOT NULL,
+  `gs_view_right_level` int(2) NOT NULL,
+  `gs_view_str` text NOT NULL,
+  `gs_view_description` text NOT NULL,
+  PRIMARY KEY (`gs_view_id`),
+  UNIQUE KEY `gs_view_pid` (`gs_view_pid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1
+
+/** gs_view_menu **/
+
+CREATE TABLE `gs_view_menu` (
+  `gs_view_menu_id` int(11) NOT NULL AUTO_INCREMENT,
+  `gs_view_menu_str` text,
+  `gs_view_right_level` int(2) DEFAULT NULL,
+  `gs_view_menu_description` text,
+  PRIMARY KEY (`gs_view_menu_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1
+
+/** gs_view_extracontent **/
+
+CREATE TABLE `gs_view_extracontent` (
+  `gs_view_extracontent_id` int(11) NOT NULL AUTO_INCREMENT,
+  `gs_view_extracontent_str` text,
+  `gs_view_extracontent_right_level` int(2) DEFAULT NULL,
+  `gs_view_extracontent_description` text,
+  PRIMARY KEY (`gs_view_extracontent_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1
+
+/** gs_view_helper **/
+
+CREATE TABLE `gs_view_helper` (
+  `gs_view_helper_id` int(11) NOT NULL AUTO_INCREMENT,
+  `gs_view_helper_str` text,
+  `gs_view_helper_description` text,
+  PRIMARY KEY (`gs_view_helper_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1
+
+/** gs_log **/
+
+CREATE TABLE `gs_log` (
+  `gs_log_id` int(11) NOT NULL AUTO_INCREMENT,
+  `gs_log_type` int(11) NOT NULL,
+  `gs_user_id` int(11) NULL,
+  `gs_log_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `gs_log_info` text NOT NULL,
+  PRIMARY KEY (`gs_log_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1
+
+/** gs_error **/
+
+CREATE TABLE `gs_error` (
+  `gs_error_id` int(11) NOT NULL AUTO_INCREMENT,
+  `gs_error_str` varchar(255) NOT NULL,
+  `gs_error_description` text,
+  PRIMARY KEY (`gs_error_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1

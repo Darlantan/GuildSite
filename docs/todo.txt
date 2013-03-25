@@ -1,0 +1,21 @@
+List of features and fixes still needed
+
+General:
+[x] User data editing
+[x] Username & email unique validation when signing up
+[ ] Hide mysql errors (Maybe make a switch to turn on/off all errors incl php ones)
+[ ] Email sending + Activation link
+[ ] Option to stay logged in permanently (with cookie)
+[ ] Newsfeed
+	[ ] Newsfeed comment system
+[ ] Forgot password
+
+Admin features:
+[x] User list
+	[ ] List sorting
+[ ] User search
+[x] Edit user data (NEEDS TO BE TESTED)
+[ ] Edit newsfeed
+
+Forum features:
+[ ] ...

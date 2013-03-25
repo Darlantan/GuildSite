@@ -1,0 +1,69 @@
+gs_user
+    gs_user_id
+    gs_user_firstname
+    gs_user_lastname
+    gs_user_email
+    gs_user_username
+    gs_user_password
+    gs_user_date_of_join
+    gs_user_date_of_activation
+    gs_user_state
+    gs_user_level
+
+gs_user_preferences
+    gs_user_id
+    gs_user_setting1
+    ...
+
+gs_layout
+    gs_layout_id
+    gs_layout_str
+    gs_layout_right_level
+    gs_layout_description
+
+gs_view
+    gs_view_id
+    gs_view_pid
+    gs_view_str
+    gs_view_right_level
+    gs_view_description
+
+gs_view_menu
+    gs_view_menu_id
+    gs_view_menu_str
+    gs_view_right_level
+    gs_view_menu_description
+
+gs_view_extracontent
+    gs_view_extracontent_id
+    gs_view_extracontent_str
+    gs_view_extracontent_right_level
+    gs_view_extracontent_description
+
+gs_view_helper
+    gs_view_helper_id
+    gs_view_helper_str
+    gs_view_helper_description
+
+gs_news
+    gs_news_id
+    gs_news_str
+    gs_news_date
+    gs_user_id
+
+gs_errors
+    gs_error_id
+    gs_error_str
+    gs_error_description
+
+gs_log
+    gs_log_id
+    gs_log_type
+    gs_log_date
+    gs_log_str
+
+gs_forum
+
+gs_forum_threads
+
+gs_forum_posts
