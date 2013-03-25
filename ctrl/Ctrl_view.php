@@ -34,26 +34,26 @@ class Ctrl_view
 		
 		foreach($users as $key => $value) {
 			$user_id = $value["gs_user_id"];
-			$user = Ctrl_user::getUserById($user_id);
+			$edituser = Ctrl_user::getUserById($user_id);
 			$str .= $user_list_view->getViewStr();
 			
 			$tmp_str = $str;
 			while(self::findTags($tmp_str, $tag) !== false){
 				switch($tag) {
 					case Bank::TAG_USER_ID:
-						$replace_with = $user->getId();
+						$replace_with = $edituser->getId();
 						break;
 					case Bank::TAG_FIRSTNAME:
-						$replace_with = $user->getFirstname();
+						$replace_with = $edituser->getFirstname();
 						break;
 					case Bank::TAG_LASTNAME:
-						$replace_with = $user->getLastname();
+						$replace_with = $edituser->getLastname();
 						break;
 					case Bank::TAG_EMAIL:
-						$replace_with = $user->getEmail();
+						$replace_with = $edituser->getEmail();
 						break;
 					case Bank::TAG_USERNAME:
-						$replace_with = $user->getUsername();
+						$replace_with = $edituser->getUsername();
 						break;
 				}
 				
