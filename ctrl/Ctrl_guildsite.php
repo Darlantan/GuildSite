@@ -317,8 +317,7 @@ class Ctrl_guildsite
 			$edituser = Ctrl_user::getUserById($post[Bank::SUBMIT_EDIT_USER]);
 		}
 		// Find all the rest of the tags and replace them with required content.
-		$str .= print_r($user);
-		$str .= print_r($edituser);
+		
 		while(Ctrl_view::findTags($tmp_str, $tag) !== false) {
 			$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser);
 			
