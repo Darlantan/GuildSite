@@ -320,9 +320,8 @@ class Ctrl_guildsite
 		
 		while(Ctrl_view::findTags($tmp_str, $tag) !== false) {
 			$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser);
-			echo $tag."<br />";
 			
-			$to_replace = $tag_mark.$key.$tag_mark;
+			$to_replace = $tag_mark.$tag.$tag_mark;
 			
 			$str = str_replace($to_replace, $replace_with, $str);
 		}
