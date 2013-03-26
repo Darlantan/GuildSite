@@ -76,11 +76,19 @@ class Ctrl_user
 		$edituser_id = 0;
 		
 		if(isset($post[Bank::INPUT_USER_ID])) {
+			// If a user ID is submitted with the form, find the existing user.
 			$edituser_id = $post[Bank::INPUT_USER_ID];
 			$edituser = self::getUserById($edituser_id);
+			if(!$edituser) {
+				$edituser_id = 0;
+			}
 		}
 		
-		// Check whether all data is submitted
+		// Check whether all data is submitted. Currently required:
+		// Firstname
+		// Lastname
+		// Email
+		// Username
 		if(empty($post[Bank::INPUT_USER_FIRSTNAME])) {
 			$errors[] = Bank::ERROR_MISSING_FIRSTNAME;
 		}
