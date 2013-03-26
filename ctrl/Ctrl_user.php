@@ -238,7 +238,6 @@ class Ctrl_user
 			$result = Sql_user::modifyUser($newuser);
 			
 			if($result == true) {
-				return $edituser_id;
 				if ($user->getLevel() > Bank::RIGHT_LEVEL_MEMBER) {
 					// If user editing is an admin, use admin log variables.
 					$log_type = Bank::LOG_TYPE_USER_UPDATED_BY_ADMIN;
@@ -248,6 +247,8 @@ class Ctrl_user
 					$log_info = Bank::LOG_INFO_USER_UPDATED.$newuser->getUsername();
 				}
 				Ctrl_log::createLogEvent($edituser_id, $log_type, $log_info);
+				
+				return $edituser_id;
 			} else {
 				$errors[] = Bank::ERROR_UPDATE_FAILED;
 				return $errors;
