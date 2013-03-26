@@ -236,7 +236,6 @@ class Ctrl_guildsite
 		$error_str		= "";
 		$tag_mark		= Bank::PARAM_TAG_MARK;
 		$key			= "";
-		$element		= null;
 		
 		
 		// If user id is 0, find the user in question.
@@ -315,11 +314,11 @@ class Ctrl_guildsite
 		
 		$tmp_str = $str;
 		if(isset($post[Bank::SUBMIT_EDIT_USER])) {
-			$user = Ctrl_user::getUserById($post[Bank::SUBMIT_EDIT_USER]);
+			$edituser = Ctrl_user::getUserById($post[Bank::SUBMIT_EDIT_USER]);
 		}
 		// Find all the rest of the tags and replace them with required content.
 		while(Ctrl_view::findTags($tmp_str, $tag) !== false) {
-			$replace_with = Ctrl_view::replaceContent($tag,$user);
+			$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser);
 			
 			$to_replace = $tag_mark.$key.$tag_mark;
 			

@@ -18,9 +18,10 @@ class Ctrl_view
 	 * @author Iiro Vaahtojärvi
 	 * @param $tag string
 	 * @param $user object
+	 * @param $edituser object
 	 * @return $replace_with string
 	 */
-	public static function replaceContent($tag,$user)
+	public static function replaceContent($tag, $user, $edituser)
 	{
 		$replace_with = "";
 		switch($tag) {
@@ -38,6 +39,21 @@ class Ctrl_view
 				break;
 			case Bank::TAG_USERNAME:
 				$replace_with = $user->getUsername();
+				break;
+			case Bank::TAG_EDIT_USER_ID:
+				$replace_with = $edituser->getId();
+				break;
+			case Bank::TAG_EDIT_FIRSTNAME:
+				$replace_with = $edituser->getFirstname();
+				break;
+			case Bank::TAG_EDIT_LASTNAME:
+				$replace_with = $edituser->getLastname();
+				break;
+			case Bank::TAG_EDIT_EMAIL:
+				$replace_with = $edituser->getEmail();
+				break;
+			case Bank::TAG_EDIT_USERNAME:
+				$replace_with = $edituser->getUsername();
 				break;
 		}
 		

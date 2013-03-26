@@ -118,6 +118,11 @@ final class Bank
 	const TAG_LASTNAME				= "LASTNAME";
 	const TAG_EMAIL					= "EMAIL";
 	const TAG_USERNAME				= "USERNAME";
+	const TAG_EDIT_USER_ID			= "EDIT_USER_ID";
+	const TAG_EDIT_FIRSTNAME		= "EDIT_FIRSTNAME";
+	const TAG_EDIT_LASTNAME			= "EDIT_LASTNAME";
+	const TAG_EDIT_EMAIL			= "EDIT_EMAIL";
+	const TAG_EDIT_USERNAME			= "EDIT_USERNAME";
 	
 	/* 
 	 * Input names. The values of these must be used in view strings in order for the functionality to work.
