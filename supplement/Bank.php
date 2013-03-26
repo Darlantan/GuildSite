@@ -91,6 +91,11 @@ final class Bank
 	const LOG_TYPE_LOGIN_INVALID	= 6;
 	const LOG_TYPE_PAGE_NOT_FOUND	= 7;
 	const LOG_TYPE_UNAUTHORIZED		= 8;
+	const LOG_TYPE_USER_REGISTERED	= 9;
+	const LOG_TYPE_USER_UPDATED		= 100;
+	const LOG_TYPE_USER_DELETED		= 101;
+	const LOG_TYPE_USER_UPDATED_BY_ADMIN	= 400;
+	const LOG_TYPE_USER_DELETED_BY_ADMIN	= 401;
 	
 	// Log info strings
 	const LOG_INFO_USER_LOGIN		= "User logged in successfully from IP: ";
@@ -101,6 +106,12 @@ final class Bank
 	const LOG_INFO_LOGIN_INVALID	= "Invalid login: ";
 	const LOG_INFO_PAGE_NOT_FOUND	= "User tried to access non-existing page: ";
 	const LOG_INFO_UNAUTHORIZED		= "User tried to access unauthorized page: ";
+	const LOG_INFO_USER_REGISTERED	= "New user registered: ";
+	const LOG_INFO_USER_UPDATED		= "User updated: ";
+	const LOG_INFO_USER_DELETED		= "User deleted: ";
+	const LOG_INFO_USER_UPDATED_BY_ADMIN	= "User updated by admin: ";
+	const LOG_INFO_USER_DELETED_BY_ADMIN	= "User deleted by admin: ";
+	
 	
 	// System reserved tags
 	const PARAM_TAG_MARK			= "##";

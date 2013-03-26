@@ -72,10 +72,12 @@ class Ctrl_user
 	 */
 	public static function modifyUserData($post, $user_id)
 	{
-		if(isset($post[Bank::INPUT_USER_ID])) {
-			$user_id = $post[Bank::INPUT_USER_ID];
-		}
 		$user = self::getUserById($user_id);
+		
+		if(isset($post[Bank::INPUT_USER_ID])) {
+			$edituser_id = $post[Bank::INPUT_USER_ID];
+			$edituser = self::getUserById($edituser_id);
+		}
 		
 		// Check whether all data is submitted
 		if(empty($post[Bank::INPUT_USER_FIRSTNAME])) {
@@ -96,7 +98,7 @@ class Ctrl_user
 			return $errors;
 		}
 		
-		if($user_id == 0) {
+		if($edituser_id == 0) {
 			// If user doesn't exist
 			
 			if(empty($post[Bank::INPUT_USER_PASSWORD])) {
@@ -161,25 +163,29 @@ class Ctrl_user
 				return $errors;
 			}
 			
-			$user_id = Sql_user::addUser($newuser);
+			$return_user_id = Sql_user::addUser($newuser);
 			
-			return $user_id;
+			$log_type = Bank::LOG_TYPE_USER_REGISTERED;
+			$log_info = Bank::LOG_INFO_USER_REGISTERED.$newuser->getUsername();
+			Ctrl_log::createLogEvent($return_user_id, $log_type, $log_info);
+			
+			return $return_user_id;
 		} else {
 			// If user exists
 			$newuser = new User();
-			$newuser->setId($user_id);
+			$newuser->setId($edituser_id);
 			$newuser->setFirstname($post[Bank::INPUT_USER_FIRSTNAME]);
 			$newuser->setLastname($post[Bank::INPUT_USER_LASTNAME]);
 			$newuser->setState(Bank::USER_STATE_ACTIVE);
 			
 			if(empty($post[Bank::INPUT_USER_RIGHT_LEVEL])) {
-				$newuser->setLevel($user->getLevel());
+				$newuser->setLevel($edituser->getLevel());
 			} else {
 				$newuser->setLevel($post[Bank::INPUT_USER_RIGHT_LEVEL]);
 			}
 			
 			$email = $post[Bank::INPUT_USER_EMAIL];
-			if($email == $user->getEmail()) {
+			if($email == $edituser->getEmail()) {
 				$newuser->setEmail($email);
 			} else if(!Ctrl_guildsite::validateEmail($email)) {
 				// If email is invalid add an errors
@@ -193,7 +199,7 @@ class Ctrl_user
 			}
 			
 			$username = $post[Bank::INPUT_USER_USERNAME];
-			if($username == $user->getUsername()) {
+			if($username == $edituser->getUsername()) {
 				$newuser->setUsername($username);
 			} else if(Sql_user::selectUserByUsername($username)) {
 				// If username already exists
@@ -212,7 +218,7 @@ class Ctrl_user
 			$password1 = $post[Bank::INPUT_USER_PASSWORD];
 			$password2 = $post[Bank::INPUT_USER_PASSWORD2];
 			if(empty($password1) && empty($password2)) {
-				$newuser->setPassword($user->getPassword());
+				$newuser->setPassword($edituser->getPassword());
 			} else if($password1 === $password2 && strlen($password1) >= Bank::PASSWORD_MIN_LENGTH) {
 				// If submitted passwords match and are long enough, crypt the password
 				$newuser->setPassword(Ctrl_guildsite::createPassword($password1));
@@ -232,7 +238,16 @@ class Ctrl_user
 			$result = Sql_user::modifyUser($newuser);
 			
 			if($result == true) {
-				return $user_id;
+				return $edituser_id;
+				if ($user->getLevel() > Bank::RIGHT_LEVEL_MEMBER) {
+					// If user editing is an admin, use admin log variables.
+					$log_type = Bank::LOG_TYPE_USER_UPDATED_BY_ADMIN;
+					$log_info = Bank::LOG_INFO_USER_UPDATED_BY_ADMIN.$newuser->getUsername()." / ".$user->getUsername();
+				} else {
+					$log_type = Bank::LOG_TYPE_USER_UPDATED;
+					$log_info = Bank::LOG_INFO_USER_UPDATED.$newuser->getUsername();
+				}
+				Ctrl_log::createLogEvent($edituser_id, $log_type, $log_info);
 			} else {
 				$errors[] = Bank::ERROR_UPDATE_FAILED;
 				return $errors;

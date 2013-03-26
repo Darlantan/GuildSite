@@ -154,7 +154,9 @@ class Ctrl_guildsite
 			$user_level	= $_SESSION["user_level"];
 		}
 		
-		// Call for function that handles actually doing anything
+		// Call for function that handles actually doing anything. Switch case 
+		// will look like the one later in this function, but that one handles 
+		// views after the action.
 		self::runEdit($post, $result, $user_id);
 		
 		// Fetch layout string based on user level
