@@ -182,6 +182,17 @@ class Ctrl_user
 		} else {
 			// If user exists
 			
+			// User right level check
+			if($user->getId() != $edituser_id) {
+				// If editing user id is different than the user being edited
+				if((!$user->getLevel() >= Bank::ALLOW_EDIT_USER_LEVEL) || ($user->getLevel() < $edituser->getLevel())) {
+					// If editing users level is below the allowed edit user limit OR
+					// if the editing users level is below the edited user, give error.
+					$errors[] = Bank::ERROR_UNAUTHORIZED_EDIT;
+					return $errors;
+				}
+			}
+			
 			if(!empty($post[Bank::INPUT_USER_RIGHT_LEVEL])) {
 				// If any user right level was submitted, set that.
 				$edituser->setLevel($post[Bank::INPUT_USER_RIGHT_LEVEL]);
@@ -190,40 +201,39 @@ class Ctrl_user
 			$email = $post[Bank::INPUT_USER_EMAIL];
 			if($email != $edituser->getEmail()) {
 				// If email was updated
+				// Select from database with new email
+				$tmpresult = Sql_user::selectUserByEmail($email);
 				if(!Ctrl_guildsite::validateEmail($email)){
 					// If email is invalid, add error
 					$errors[] = Bank::ERROR_INVALID_EMAIL;
-				}
-				
-				// Select from database with new email
-				$tmpresult = Sql_user::selectUserByEmail($email);
-				if($tmpresult) {
+				} else if($tmpresult && ($edituser->getId() != $tmpresult[Bank::INPUT_USER_ID])) {
 					// If result is found, compare returned user ID with current user id. 
 					// If there is no match, email is in use by someone else, return error.
-					if($edituser->getId() != $tmpresult[Bank::INPUT_USER_ID]){
-						$errors[] = Bank::ERROR_EMAIL_IN_USE;
-					}
+					$errors[] = Bank::ERROR_EMAIL_IN_USE;
+				} else {
+					// Everything OK, set new email.
+					$edituser->setEmail($email);
 				}
 			}
 			
 			$username = $post[Bank::INPUT_USER_USERNAME];
 			if($username != $edituser->getUsername()) {
 				// If username was updated
+				// Select from database with new username
+				$tmpresult = Sql_user::selectUserByUsername($username);
 				if(strlen($username) < Bank::USERNAME_MIN_LENGTH) {
 					// If username is too short
 					$errors[] = Bank::ERROR_USERNAME_TOO_SHORT;
 				} else if (strlen($username) > Bank::USERNAME_MAX_LENGTH) {
 					// If username is too long
 					$errors[] = Bank::ERROR_USERNAME_TOO_LONG;
-				}
-				// Select from database with new username
-				$tmpresult = Sql_user::selectUserByUsername($username);
-				if($tmpresult) {
+				} else if($tmpresult && ($edituser->getId() != $tmpresult[Bank::INPUT_USER_ID])) {
 					// If result is found, compare returned user ID with current user id.
 					// If there is no match, username is in use by someone else, return error.
-					if($edituser->getId() != $tmpresult[Bank::INPUT_USER_ID]){
-						$errors[] = Bank::ERROR_USERNAME_IN_USE;
-					}
+					$errors[] = Bank::ERROR_USERNAME_IN_USE;
+				} else {
+					// No problems, change username.
+					$edituser->setUsername($username);
 				}
 			}
 			
@@ -232,7 +242,7 @@ class Ctrl_user
 			if(empty($password1) && empty($password2)) {
 				// If both submitted passwords are empty, don't change anything.
 			} else if($password1 === $password2 && strlen($password1) >= Bank::PASSWORD_MIN_LENGTH) {
-				// If submitted passwords match and are long enough, crypt the password
+				// If submitted passwords match and are long enough, crypt and set the password
 				$edituser->setPassword(Ctrl_guildsite::createPassword($password1));
 			} else if($password1 !== $password2) {
 				// If submitted passwords don't match, add an error.
@@ -246,6 +256,10 @@ class Ctrl_user
 			if(empty($errors) === false) {
 				return $errors;
 			}
+			
+			// Set firstname and lastname from $post
+			$edituser->setFirstname($post[Bank::INPUT_USER_FIRSTNAME]);
+			$edituser->setLastname($post[Bank::INPUT_USER_LASTNAME]);
 			
 			$result = Sql_user::modifyUser($edituser);
 			

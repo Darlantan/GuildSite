@@ -43,6 +43,7 @@ final class Bank
 	const PASSWORD_MIN_LENGTH		= 6;
 	const USERNAME_MIN_LENGTH		= 3;
 	const USERNAME_MAX_LENGTH		= 25;
+	const ALLOW_EDIT_USER_LEVEL		= 3; // Allow Moderators and up to edit other users
 	
 	// Page ID's (from DB: gs_view)
 	const PAGE_ID_FRONTPAGE			= 1;
@@ -81,6 +82,7 @@ final class Bank
 	const ERROR_EMAIL_IN_USE		= 12;
 	const ERROR_USERNAME_IN_USE		= 13;
 	const ERROR_UPDATE_FAILED		= 14;
+	const ERROR_UNAUTHORIZED_EDIT	= 15;
 	
 	// Log ID's
 	const LOG_TYPE_USER_LOGIN		= 1;
