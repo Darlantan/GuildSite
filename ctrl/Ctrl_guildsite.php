@@ -152,6 +152,7 @@ class Ctrl_guildsite
 		if(isset($_SESSION["user_id"])) {
 			$user_id	= $_SESSION["user_id"];
 			$user_level	= $_SESSION["user_level"];
+			$user		= Ctrl_user::getUserById($user_id);
 		}
 		
 		// Call for function that handles actually doing anything. Switch case 
