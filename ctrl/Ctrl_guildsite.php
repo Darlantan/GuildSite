@@ -249,7 +249,7 @@ class Ctrl_guildsite
 		$key			= "";
 		
 		
-		// If user id is 0, find the user in question.
+		// If user id is not 0, find the user in question.
 		if($user_id != 0) {
 			$user = Ctrl_user::getUserById($user_id);
 			$user_level = $user->getLevel();
@@ -325,7 +325,13 @@ class Ctrl_guildsite
 		
 		$tmp_str = $str;
 		if(isset($post[Bank::SUBMIT_EDIT_USER])) {
+			// If going in to editing another user, grab the editable users ID from the button used.
+			// TODO: Figure out a better way, now "value" attribute for the button has to be ##EDIT_USER_ID##.. 
 			$edituser = Ctrl_user::getUserById($post[Bank::SUBMIT_EDIT_USER]);
+		}
+		if(isset($post[Bank::SUBMIT_USER_EDIT])) {
+			// If Edit user form has been submitted but the page is requested again (in case of error), get edited user from $post.
+			$edituser = Ctrl_user::getUserById($post[Bank::INPUT_USER_ID]);
 		}
 		// Find all the rest of the tags and replace them with required content.
 		
