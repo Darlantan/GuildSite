@@ -11,6 +11,8 @@ General:
 	[ ] Newsfeed comment system
 [ ] Forgot password
 
+[ ] Success messages in addition to error messages
+
 Admin features:
 [x] User list
 	[ ] List sorting
