@@ -140,6 +140,8 @@ final class Bank
 	/* 
 	 * Input names. The values of these must be used in view strings in order for the functionality to work.
 	 * For example <input type="button" name="SUBMIT_LOGIN" value="Log in!" />
+	 * 
+	 * Note: For SUBMIT_EDIT_USER the value must be ##USER_ID##. For now.
 	 */
 	// Submits
 	const SUBMIT_LOGIN				= "SUBMIT_LOGIN";
