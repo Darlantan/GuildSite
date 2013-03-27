@@ -187,7 +187,15 @@ class Ctrl_guildsite
 					if(is_int($result)) {
 						// If result is integer after user has been modified, modification was successful
 						$pid = Bank::PAGE_ID_MODIFIED_USER;
-						$user_id = $result;
+						// $user_id = $result;
+					} else {
+						// If result is not integer, user modification has gone wrong and $result has errors.
+						if($user->getLevel() < Bank::ALLOW_EDIT_USER_LEVEL) {
+							// If user was editing self
+							$pid = Bank::PAGE_ID_EDIT_USER;
+						} else {
+							$pid = Bank::PAGE_ID_ADMIN_EDIT_USER;
+						}
 					}
 					$view = self::lookForViewToShow($pid, $user_id);
 					break;

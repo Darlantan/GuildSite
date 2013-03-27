@@ -183,9 +183,9 @@ class Ctrl_user
 			// If user exists
 			
 			// User right level check
-			if($user->getId() != $edituser_id) {
+			if($user->getId() != $edituser->getId()) {
 				// If editing user id is different than the user being edited
-				if((!$user->getLevel() >= Bank::ALLOW_EDIT_USER_LEVEL) || ($user->getLevel() < $edituser->getLevel())) {
+				if(($user->getLevel() < Bank::ALLOW_EDIT_USER_LEVEL) || ($user->getLevel() < $edituser->getLevel())) {
 					// If editing users level is below the allowed edit user limit OR
 					// if the editing users level is below the edited user, give error.
 					$errors[] = Bank::ERROR_UNAUTHORIZED_EDIT;
