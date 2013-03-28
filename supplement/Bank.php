@@ -83,6 +83,7 @@ final class Bank
 	const ERROR_USERNAME_IN_USE		= 13;
 	const ERROR_UPDATE_FAILED		= 14;
 	const ERROR_UNAUTHORIZED_EDIT	= 15;
+	const ERROR_UNAUTHORIZED_DELETE	= 16;
 	
 	// Log ID's
 	const LOG_TYPE_USER_LOGIN		= 1;
@@ -147,6 +148,7 @@ final class Bank
 	const SUBMIT_LOGIN				= "SUBMIT_LOGIN";
 	const SUBMIT_USER_JOIN			= "SUBMIT_USER_JOIN";
 	const SUBMIT_USER_EDIT			= "SUBMIT_USER_EDIT";
+	const SUBMIT_USER_DELETE		= "SUBMIT_USER_DELETE";
 	const SUBMIT_EDIT_USER			= "SUBMIT_EDIT_USER";
 	
 	// Inputs

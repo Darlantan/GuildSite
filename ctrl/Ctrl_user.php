@@ -281,5 +281,47 @@ class Ctrl_user
 			}
 		}
 	}
+	
+	/**
+	 * Function deleteUser
+	 * 
+	 * Function handles user rights for deletion and deletes the user requested.
+	 * Returns true if user was deleted, errors array if not.
+	 * 
+	 * @author Iiro Vaahtojärvi
+	 * @param $post array
+	 * @param $user_id int
+	 * @return $result
+	 */
+	public static function deleteUser($post, $user_id)
+	{
+		$user = self::getUserById($user_id);
+		$deleteuser = self::getUserById($post[Bank::INPUT_USER_ID]);
+		
+		$errors = array();
+		
+		if($user->getId() != $deleteuser->getId()) {
+			// If user isn't deleting self
+			if(($user->getLevel() <= $deleteuser->getLevel()) && ($user->getLevel() != Bank::RIGHT_LEVEL_SUPERADMIN)) {
+				// If user trying to delete another user has same level or lower or user isn't a superadmin, give error.
+				$errors[] = Bank::ERROR_UNAUTHORIZED_DELETE;
+			}
+			
+			if(!empty($errors)) {
+				// If there were errors, return them.
+				return $errors;
+			} else {
+				// No errors, delete user
+				if(!Sql_user::deleteUser($deleteuser)) {
+					// Delete was unsuccessful
+					$errors[] = Bank::ERROR_DELETE_FAILED;
+					return $errors;
+				} else {
+					// Delete was successful
+					return true;
+				}
+			}
+		}
+	}
 }
 ?>

@@ -116,5 +116,21 @@ class Sql_user extends Sql
 		$query = "UPDATE gs_user SET gs_user_firstname = '".$user->getFirstname()."', gs_user_lastname = '".$user->getLastname()."', gs_user_email = '".$user->getEmail()."', gs_user_username = '".$user->getUsername()."', gs_user_password = '".$user->getPassword()."', gs_user_state = ".$user->getState().", gs_user_level = ".$user->getLevel()." WHERE gs_user_id = ".$user->getId();
 		return parent::update($query);
 	}
+	
+	/**
+	 * Function deleteUser
+	 * 
+	 * Deletes an existing user.
+	 * 
+	 * @author Iiro Vaahtojärvi
+	 * @param object $user
+	 * @return boolean
+	 */
+	public static function deleteUser($user)
+	{
+		$query = "DELETE FROM gs_user WHERE gs_user_id = ".$user->getId();
+		return parent::delete($query);
+	}
+	
 }
 ?>

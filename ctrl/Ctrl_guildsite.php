@@ -200,6 +200,22 @@ class Ctrl_guildsite
 					}
 					$view = self::lookForViewToShow($pid, $user_id);
 					break;
+				case Bank::SUBMIT_USER_DELETE :
+					if($result === true) {
+						// If delete was successful.
+						if($user->getId() == $post[Bank::INPUT_USER_ID]) {
+							// If user ID's match and user deleted self, log user out.
+							self::logOut();
+						} else {
+							// If it was an admin deleting a user, go to user list
+							$pid = Bank::PAGE_ID_USER_LIST;
+						}
+					} else {
+						// If delete was unsuccessful, $result contains errors.
+						$pid = $get["pid"];
+					}
+					$view = self::lookForViewToShow($pid, $user_id);
+					break;
 				case Bank::SUBMIT_EDIT_USER :
 					$pid = Bank::PAGE_ID_ADMIN_EDIT_USER;
 					$view = self::lookForViewToShow($pid, $user_id);
@@ -496,6 +512,9 @@ class Ctrl_guildsite
 				break;
 			case Bank::SUBMIT_USER_EDIT:
 				$result = Ctrl_user::modifyUserData($post, $user_id);
+				break;
+			case Bank::SUBMIT_USER_DELETE:
+				$result = Ctrl_user::deleteUser($post, $user_id);
 				break;
 		}
 	}

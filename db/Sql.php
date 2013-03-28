@@ -5,6 +5,8 @@
  * 
  * Control class for basic SQL functionality. Database operations are handled through this class.
  * 
+ * Most errors will be logged with error_log. On my server that means /var/log/php_errors.log
+ * 
  * @author Iiro Vaahtojärvi
  * @copyright Iiro Vaahtojärvi
  */
@@ -30,12 +32,13 @@ class Sql
 			// If connection was successful, select database
 			$ok = mysql_select_db($database);
 			if($ok === false) {
-				// If database couldn't be selected, give error
-				print mysql_error();
+				// If database couldn't be selected, log error, return false.
+				error_log(mysql_error());
+				return $ok;
 			}
 		} else {
 			// If connection couldn't be made, give error
-			print mysql_error();
+			error_log(mysql_error());
 		}
 		return $link;
 	}
@@ -72,7 +75,7 @@ class Sql
 			}
 		} else {
 			// Error occurred
-			// print mysql_error();
+			error_log(mysql_error());
 		}
 	}
 	
@@ -92,7 +95,7 @@ class Sql
 			return $sql;
 		} else {
 			// Error occurred
-			print mysql_error();
+			error_log(mysql_error());
 		}
 	}
 	
@@ -112,7 +115,7 @@ class Sql
 			return mysql_insert_id(); // Note: This is based on the last performed query, needs to be run right after the query itself to avoid wrong id's.
 		} else {
 			// Error occurred
-			print mysql_error();
+			error_log(mysql_error());
 		}
 	}
 	
@@ -132,7 +135,7 @@ class Sql
 			return $sql;
 		} else {
 			// Error occurred
-			print mysql_error();
+			error_log(mysql_error());
 		}
 	}
 	
@@ -152,7 +155,7 @@ class Sql
 			return $sql;
 		} else {
 			// Error occurred
-			print mysql_error();
+			error_log(mysql_error());
 		}
 	}
 	
