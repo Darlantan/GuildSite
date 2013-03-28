@@ -84,6 +84,7 @@ final class Bank
 	const ERROR_UPDATE_FAILED		= 14;
 	const ERROR_UNAUTHORIZED_EDIT	= 15;
 	const ERROR_UNAUTHORIZED_DELETE	= 16;
+	const ERROR_DELETE_FAILED		= 17;
 	
 	// Log ID's
 	const LOG_TYPE_USER_LOGIN		= 1;

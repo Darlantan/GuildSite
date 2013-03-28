@@ -344,10 +344,11 @@ class Ctrl_guildsite
 			// If going in to editing another user, grab the editable users ID from the button used.
 			// TODO: Figure out a better way, now "value" attribute for the button has to be ##EDIT_USER_ID##.. 
 			$edituser = Ctrl_user::getUserById($post[Bank::SUBMIT_EDIT_USER]);
-		}
-		if(isset($post[Bank::SUBMIT_USER_EDIT])) {
+		} else if(isset($post[Bank::SUBMIT_USER_EDIT])) {
 			// If Edit user form has been submitted but the page is requested again (in case of error), get edited user from $post.
 			$edituser = Ctrl_user::getUserById($post[Bank::INPUT_USER_ID]);
+		} else {
+			$edituser = array();
 		}
 		// Find all the rest of the tags and replace them with required content.
 		

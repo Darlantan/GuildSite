@@ -321,6 +321,16 @@ class Ctrl_user
 					return true;
 				}
 			}
+		} else {
+			// If user IS deleting self
+			if(!Sql_user::deleteUser($deleteuser)) {
+				// If delete was unsuccessful
+				$errors[] = Bank::ERROR_DELETE_FAILED;
+				return $errors;
+			} else {
+				// Delete successful
+				return true;
+			}
 		}
 	}
 }
