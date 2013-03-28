@@ -20,6 +20,7 @@ class Path
 	public static $Ctrl_log         = "ctrl/Ctrl_log.php";
 	public static $Ctrl_user		= "ctrl/Ctrl_user.php";
 	public static $Ctrl_view		= "ctrl/Ctrl_view.php";
+	public static $Ctrl_news		= "ctrl/Ctrl_news.php";
 	
 	// Bank
 	public static $Bank             = "supplement/Bank.php";
@@ -28,12 +29,14 @@ class Path
 	public static $User             = "model/User.php";
 	//public static $Parser			= "model/Parser.php";
 	public static $View				= "model/View.php";
+	public static $News				= "model/News.php";
 
 	// DB classes
 	public static $Sql              = "db/Sql.php";
 	public static $Sql_user         = "db/Sql_user.php";
 	public static $Sql_log          = "db/Sql_log.php";
 	public static $Sql_view			= "db/Sql_view.php";
+	public static $Sql_news			= "db/Sql_news.php";
 
 
 	// Server path vars

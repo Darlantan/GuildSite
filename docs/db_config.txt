@@ -47,8 +47,10 @@ gs_view_helper
 
 gs_news
     gs_news_id
+	gs_new_title
     gs_news_str
     gs_news_date
+	gs_news_date_edited
     gs_user_id
 
 gs_errors

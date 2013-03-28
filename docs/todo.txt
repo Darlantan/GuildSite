@@ -4,14 +4,22 @@ General:
 [x] User data editing
 [x] Remove self
 [x] Username & email unique validation when signing up
-[ ] Hide mysql errors (Maybe make a switch to turn on/off all errors incl php ones)
+[ ] Captcha possibility for sign up
+[x] Hide mysql errors (Maybe make a switch to turn on/off all errors incl php ones) --> Mysql errors logged in /var/log/php_errors.log
+[ ] Service break with test page.
 [ ] Email sending + Activation link
 [ ] Option to stay logged in permanently (with cookie)
+	[ ] Do other cookie stuff as well.
 [ ] Newsfeed
-	[ ] Newsfeed comment system
+	[ ] Insert news
+	[ ] Edit news
+	[ ] Delete news
+	[ ] Wysiwyg
+[ ] Newsfeed comment system
 [ ] Forgot password
 
 [ ] Success messages in addition to error messages
+[ ] Critical / unauthorized error logging in a mysql table.
 
 Admin features:
 [x] User list
@@ -24,3 +32,12 @@ Admin features:
 
 Forum features:
 [ ] ...
+
+Later:
+[ ] Customizeable themes
+	[ ] CSS editing
+	[ ] Template editing
+	[ ] Export / import
+[ ] Setup script for the site
+	[ ] Create database tables, fill ones needed with default data
+	[ ] Set up default theme

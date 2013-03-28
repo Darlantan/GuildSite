@@ -20,9 +20,11 @@ final class Bank
 	// Site name variable. Needs to be different for each site instance.
 	const GUILDSITE_NAME			= "scythe";
 	
-	// System pages
+	// System pages and directories
 	const SYSTEM_INDEX_PAGE			= "index.php";
 	const SYSTEM_TEST_PAGE			= "index.php";
+	const SYSTEM_DEFAULT_IMG_PATH	= "img/";
+	const SYSTEM_DEFAULT_CSS_PATH	= "css/";
 	
 	// Feature switches
 	const EMAIL_SENDING_ACTIVE		= true;
@@ -126,6 +128,8 @@ final class Bank
 	const EXTRA_CONTENT				= "##EXTRA_CONTENT##";
 	const USER_LIST					= "##USER_LIST##";
 	const USER_LIST_CONTENT			= "##USER_LIST_CONTENT##";
+	const NEWS_LIST					= "##NEWS_LIST##";
+	const NEWS_LIST_CONTENT			= "##NEWS_LIST_CONTENT##";
 	
 	// Possible values for strings inside tags (##something##)
 	const TAG_USER_ID				= "USER_ID";
@@ -138,6 +142,11 @@ final class Bank
 	const TAG_EDIT_LASTNAME			= "EDIT_LASTNAME";
 	const TAG_EDIT_EMAIL			= "EDIT_EMAIL";
 	const TAG_EDIT_USERNAME			= "EDIT_USERNAME";
+	
+	const TAG_NEWS_ID				= "NEWS_ID";
+	const TAG_NEWS_TITLE			= "NEWS_TITLE";
+	const TAG_NEWS_STR				= "NEWS_STR";
+	const TAG_NEWS_DATE				= "NEWS_DATE";
 	
 	/* 
 	 * Input names. The values of these must be used in view strings in order for the functionality to work.
@@ -152,6 +161,11 @@ final class Bank
 	const SUBMIT_USER_DELETE		= "SUBMIT_USER_DELETE";
 	const SUBMIT_EDIT_USER			= "SUBMIT_EDIT_USER";
 	
+	const SUBMIT_ADD_NEWS			= "SUBMIT_ADD_NEWS";
+	const SUBMIT_EDIT_NEWS			= "SUBMIT_EDIT_NEWS";
+	const SUBMIT_DELETE_NEWS		= "SUBMIT_DELETE_NEWS";
+	const SUBMIT_GO_EDIT_NEWS		= "SUBMIT_GO_EDIT_NEWS";
+	
 	// Inputs
 	const INPUT_USER_ID				= "INPUT_USER_ID";
 	const INPUT_USER_FIRSTNAME		= "INPUT_USER_FIRSTNAME";
@@ -161,6 +175,10 @@ final class Bank
 	const INPUT_USER_PASSWORD		= "INPUT_USER_PASSWORD";
 	const INPUT_USER_PASSWORD2		= "INPUT_USER_PASSWORD2";
 	const INPUT_USER_RIGHT_LEVEL	= "INPUT_USER_RIGHT_LEVEL";
+	
+	const INPUT_NEWS_ID				= "INPUT_NEWS_ID";
+	const INPUT_NEWS_TITLE			= "INPUT_NEWS_TITLE";
+	const INPUT_NEWS_STR			= "INPUT_NEWS_STR";
 	
 	// Database table names
 	const DB_TABLE_USER				= "gs_user";
