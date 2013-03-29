@@ -23,6 +23,21 @@ class Sql_news extends Sql
 		$query = "SELECT gs_news_id FROM gs_news";
 		return parent::select($query);
 	}
+	
+	/**
+	 * Function selectNewsById
+	 * 
+	 * Function selects a news article based on the article ID given.
+	 * 
+	 * @author Iiro Vaahtojärvi
+	 * @param $id int
+	 * @return $result array
+	 */
+	public static function selectNewsById($id)
+	{
+		$query = "SELECT * FROM gs_news WHERE gs_news_id = ".$id;
+		return parent::select($query);
+	}
 }
 
 ?>
