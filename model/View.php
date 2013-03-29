@@ -18,10 +18,11 @@ class View
 	
 	function __construct()
 	{
-		$this->id = 0;
-		$this->view_str = "";
-		$this->pid = 0;
-		$this->lid = 0;
+		$this->id				= 0;
+		$this->view_str			= "";
+		$this->pid				= 0;
+		$this->lid				= 0;
+		$this->right_level		= 0;
 	}
 	
 	function getId() {

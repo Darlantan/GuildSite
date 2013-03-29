@@ -10,7 +10,19 @@
  */
 class Sql_news extends Sql
 {
-	//put your code here
+	/**
+	 * Function selectAllNews
+	 * 
+	 * Function selects all ids of news from the database and returns an array.
+	 * 
+	 * @author Iiro Vaahtojärvi
+	 * @return $result array
+	 */
+	public static function selectAllNews()
+	{
+		$query = "SELECT gs_news_id FROM gs_news";
+		return parent::select($query);
+	}
 }
 
 ?>

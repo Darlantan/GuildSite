@@ -67,6 +67,8 @@ final class Bank
 	const VIEW_ID_ERRORTEMPLATE		= 1;
 	const VIEW_ID_USER_LIST_TEMPLATE= 2;
 	const VIEW_ID_USER_LIST_CONTENT	= 3;
+	const VIEW_ID_NEWS_LIST_TEMPLATE= 4;
+	const VIEW_ID_NEWS_LIST_CONTENT	= 5;
 	
 	// Error message id's (from DB: gs_error)
 	const ERROR_LOGIN_FAILED		= 1;

@@ -327,16 +327,27 @@ class Ctrl_guildsite
 		// If content user list tag is found
 		if(strpos($str, Bank::USER_LIST) !== false) {
 			// Get strings for wrapper and content
-			$user_list_wrapper = new View();
-			$tmp = Sql_view::selectHelperViewByParams(Bank::VIEW_ID_USER_LIST_TEMPLATE);
-			$user_list_wrapper->setViewStr($tmp[0]["gs_view_helper_str"]);
+			$user_list_wrapper = Ctrl_view::fetchHelperView(Bank::VIEW_ID_USER_LIST_TEMPLATE);
 			$user_list_str = Ctrl_view::buildUserList();
 			
 			// Replace content tag from wrapper with content string
-			$user_list_wrapper = str_replace(Bank::USER_LIST_CONTENT, $user_list_str, $user_list_wrapper->getViewStr());
+			$user_list_wrapper_str = str_replace(Bank::USER_LIST_CONTENT, $user_list_str, $user_list_wrapper->getViewStr());
 			
 			// Replace wrapper tag from viewstring with wrapper string
-			$str = str_replace(Bank::USER_LIST, $user_list_wrapper, $str);
+			$str = str_replace(Bank::USER_LIST, $user_list_wrapper_str, $str);
+		}
+		
+		// If content news list tag is found
+		if(strpos($str, Bank::NEWS_LIST) !== false) {
+			// Get strings for wrapper and content
+			$news_list_wrapper = Ctrl_view::fetchHelperView(Bank::VIEW_ID_NEWS_LIST_TEMPLATE);
+			$news_list_str = Ctrl_view::buildNewsList();
+			
+			// Replace content tag from wrapper with content string
+			$news_list_wrapper_str = str_replace(Bank::NEWS_LIST_CONTENT, $news_list_str, $user_list_wrapper ->getViewStr());
+			
+			// Replace wrapper tag from viewstring with completed list string
+			$str = str_replace(Bank::NEWS_LIST, $news_list_wrapper_str, $str);
 		}
 		
 		$tmp_str = $str;
@@ -353,7 +364,7 @@ class Ctrl_guildsite
 		// Find all the rest of the tags and replace them with required content.
 		
 		while(Ctrl_view::findTags($tmp_str, $tag) !== false) {
-			$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser);
+			$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser,false);
 			
 			$to_replace = $tag_mark.$tag.$tag_mark;
 			

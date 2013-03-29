@@ -19,9 +19,10 @@ class Ctrl_view
 	 * @param $tag string
 	 * @param $user object
 	 * @param $edituser object
+	 * @param $article object
 	 * @return $replace_with string
 	 */
-	public static function replaceContent($tag, $user, $edituser)
+	public static function replaceContent($tag, $user = false, $edituser = false, $article= false)
 	{
 		$replace_with = "";
 		switch($tag) {
@@ -55,6 +56,18 @@ class Ctrl_view
 			case Bank::TAG_EDIT_USERNAME:
 				$replace_with = $edituser->getUsername();
 				break;
+			case Bank::TAG_NEWS_ID:
+				$replace_with = $article->getId();
+				break;
+			case Bank::TAG_NEWS_TITLE:
+				$replace_with = $article->getTitle();
+				break;
+			case Bank::TAG_NEWS_STR:
+				$replace_with = $article->getStr();
+				break;
+			case Bank::TAG_NEWS_DATE:
+				$replace_with = $article->getDate();
+				break;
 		}
 		
 		return $replace_with;
@@ -72,24 +85,17 @@ class Ctrl_view
 	{
 		$str = "";
 		$tag_mark = Bank::PARAM_TAG_MARK;
-		
 		$users = Sql_user::selectAllUsers();
 		
-		$user_count = count($users);
-		
-		$user_list_view = new View();
-		$tmp = Sql_view::selectHelperViewByParams(Bank::VIEW_ID_USER_LIST_CONTENT);
-		$user_list_view->setViewStr($tmp[0]["gs_view_helper_str"]);
-		unset($tmp);
+		$user_list_view = self::fetchHelperView(Bank::VIEW_ID_USER_LIST_CONTENT);
 		
 		foreach($users as $key => $value) {
-			$user_id = $value["gs_user_id"];
-			$edituser = Ctrl_user::getUserById($user_id);
+			$edituser = Ctrl_user::getUserById($value["gs_user_id"]);
 			$str .= $user_list_view->getViewStr();
 			
 			$tmp_str = $str;
 			while(self::findTags($tmp_str, $tag) !== false){
-				$replace_with = self::replaceContent($tag, $edituser);
+				$replace_with = self::replaceContent($tag, $edituser, false, false);
 				
 				$to_replace = $tag_mark.$tag.$tag_mark;
 				
@@ -99,6 +105,61 @@ class Ctrl_view
 		
 		return $str;
 		
+	}
+	
+	/**
+	 * Function buildNewsList
+	 * 
+	 * Function builds a list of news based on the views and news articles in database. Returns string to be placed in view.
+	 * 
+	 * @author Iiro Vaahtojärvi
+	 * @return $str string
+	 */
+	public static function buildNewsList()
+	{
+		$str = "";
+		$tag_mark = Bank::PARAM_TAG_MARK;
+		$news = Sql_news::selectAllNews();
+		
+		$news_list_view = self::fetchHelperView(Bank::VIEW_ID_NEWS_LIST_CONTENT);
+		
+		foreach($news as $key -> $value) {
+			$article = Ctrl_news::getNewsById($value["gs_news_id"]);
+			$str .= $news_list_view->getViewStr();
+			
+			$tmp_str = $str;
+			while(self::findTags($tmp_str, $tag) !== false){
+				$replace_with = self::replaceContent($tag, $article->getAuthor(), false, $article);
+				
+				$to_replace = $tag_mark.$tag.$tag_mark;
+				
+				$str = str_replace($to_replace, $replace_with, $str);
+			}
+		}
+		
+		return $str;
+	}
+	
+	/**
+	 * Function fetchHelperView
+	 * 
+	 * Function returns a view object from helper views.
+	 * 
+	 * @author Iiro Vaahtojärvi
+	 * @param $id int
+	 * @return $view object
+	 */
+	public static function fetchHelperView($id)
+	{
+		// Get the database row into an array
+		$result = Sql_view::selectHelperViewByParams($id);
+		
+		$view = new View();
+		
+		$view->setId($array[0]["gs_view_helper_id"]);
+		$view->setViewStr($array[0]["gs_view_helper_str"]);
+		
+		return $view;
 	}
 	
 	/**
