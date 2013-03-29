@@ -123,7 +123,7 @@ class Ctrl_view
 		
 		$news_list_view = self::fetchHelperView(Bank::VIEW_ID_NEWS_LIST_CONTENT);
 		
-		foreach($news as $key -> $value) {
+		foreach($news as $key => $value) {
 			$article = Ctrl_news::getNewsById($value["gs_news_id"]);
 			$str .= $news_list_view->getViewStr();
 			
