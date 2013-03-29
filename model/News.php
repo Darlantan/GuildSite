@@ -38,7 +38,7 @@ class News
 	
 	public function getTitle()
 	{
-		return $this->id;
+		return $this->title;
 	}
 	public function setTitle($title)
 	{
