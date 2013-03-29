@@ -344,7 +344,7 @@ class Ctrl_guildsite
 			$news_list_str = Ctrl_view::buildNewsList();
 			
 			// Replace content tag from wrapper with content string
-			$news_list_wrapper_str = str_replace(Bank::NEWS_LIST_CONTENT, $news_list_str, $user_list_wrapper ->getViewStr());
+			$news_list_wrapper_str = str_replace(Bank::NEWS_LIST_CONTENT, $news_list_str, $news_list_wrapper ->getViewStr());
 			
 			// Replace wrapper tag from viewstring with completed list string
 			$str = str_replace(Bank::NEWS_LIST, $news_list_wrapper_str, $str);
