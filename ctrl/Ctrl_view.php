@@ -156,8 +156,8 @@ class Ctrl_view
 		
 		$view = new View();
 		
-		$view->setId($array[0]["gs_view_helper_id"]);
-		$view->setViewStr($array[0]["gs_view_helper_str"]);
+		$view->setId($result[0]["gs_view_helper_id"]);
+		$view->setViewStr($result[0]["gs_view_helper_str"]);
 		
 		return $view;
 	}
