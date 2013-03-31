@@ -10,11 +10,15 @@ General:
 [ ] Email sending + Activation link
 [ ] Option to stay logged in permanently (with cookie)
 	[ ] Do other cookie stuff as well.
+[ ] User settings
+	[ ] Avatar
+	[ ] Some profiles
 [ ] Newsfeed
+	[ ] News on frontpage
 	[x] Insert news
-	[ ] Edit news
-	[ ] Delete news
-	[ ] Wysiwyg
+	[x] Edit news
+	[x] Delete news
+	[x] Wysiwyg
 [ ] Newsfeed comment system
 [ ] Forgot password
 [ ] Figure out a way to do if else tags in the layouts and / or views.

@@ -46,7 +46,8 @@ final class Bank
 	const USERNAME_MIN_LENGTH		= 3;
 	const USERNAME_MAX_LENGTH		= 25;
 	const ALLOW_EDIT_USER_LEVEL		= 3; // Allow Moderators and up to edit other users
-	const TITLE_TRUNCATE			= 50; // If news article title is longer than this, truncate for lists etc
+	const TITLE_TRUNCATE			= 30; // If news article title is longer than this, truncate for lists etc
+	const LATEST_NEWS				= 5;
 	
 	// Page ID's (from DB: gs_view)
 	const PAGE_ID_FRONTPAGE			= 1;
@@ -73,6 +74,8 @@ final class Bank
 	const VIEW_ID_USER_LIST_CONTENT	= 3;
 	const VIEW_ID_NEWS_LIST_TEMPLATE= 4;
 	const VIEW_ID_NEWS_LIST_CONTENT	= 5;
+	const VIEW_ID_NEWS_ARTICLE_WRAPPER = 6;
+	const VIEW_ID_NEWS_ARTICLE_EDITED = 7;
 	
 	// Error message id's (from DB: gs_error)
 	const ERROR_LOGIN_FAILED		= 1;
@@ -142,6 +145,8 @@ final class Bank
 	const USER_LIST_CONTENT			= "##USER_LIST_CONTENT##";
 	const NEWS_LIST					= "##NEWS_LIST##";
 	const NEWS_LIST_CONTENT			= "##NEWS_LIST_CONTENT##";
+	const NEWS_DISPLAY				= "##NEWS_DISPLAY##";
+	const NEWS_DISPLAY_EDITED		= "##NEWS_EDITED_TEMPLATE##";
 	
 	// Possible values for strings inside tags (##something##)
 	const TAG_USER_ID				= "USER_ID";
@@ -159,6 +164,7 @@ final class Bank
 	const TAG_NEWS_TITLE			= "NEWS_TITLE";
 	const TAG_NEWS_STR				= "NEWS_STR";
 	const TAG_NEWS_DATE				= "NEWS_DATE";
+	const TAG_NEWS_EDITED			= "NEWS_EDITED";
 	
 	/* 
 	 * Input names. The values of these must be used in view strings in order for the functionality to work.

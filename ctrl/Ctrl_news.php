@@ -173,6 +173,26 @@ class Ctrl_news
 		
 		return $article;
 	}
+	
+	/**
+	 * Function getLatestNews
+	 * 
+	 * Function selects latest submitted news based on the amount specified in bank.
+	 * 
+	 * @author Iiro Vaahtojärvi
+	 * @return $result array
+	 */
+	public static function getLatestNews()
+	{
+		$ids = Sql_news::selectLatestNews();
+		$result = array();
+		
+		foreach($ids as $key => $value) {
+			$result[] = self::getNewsById($value);
+		}
+		
+		return $result;
+	}
 }
 
 ?>

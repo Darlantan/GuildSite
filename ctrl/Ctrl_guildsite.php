@@ -383,6 +383,44 @@ class Ctrl_guildsite
 			$str = str_replace(Bank::NEWS_LIST, $news_list_wrapper_str, $str);
 		}
 		
+		// If content news display tag is found
+		if(strpos($str, Bank::NEWS_DISPLAY) !== false) {
+			// Get string for article wrapper
+			$article_wrapper = Ctrl_view::fetchHelperView(Bank::VIEW_ID_NEWS_ARTICLE_WRAPPER);
+			$edited_wrapper = Ctrl_view::fetchHelperView(Bank::VIEW_ID_NEWS_ARTICLE_EDITED);
+			$latest_news = Ctrl_news::getLatestNews();
+			
+			$news_display_str = "";
+			foreach($latest_news as $key => $value) {
+				// Set the user who posted the news
+				$edituser = $value->getAuthor();
+				$tmp_str = $article_wrapper;
+				$tmp_str2 = "";
+				
+				if(!empty($value->getEdited())) {
+					// If article has been edited, go through the editwrapper to find tags.
+					$tmp_str2 = $edited_wrapper;
+					while(Ctrl_view::findTags($edited_wrapper, $tag) !== false) {
+						$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser, $value);
+						$to_replace = $tag_mark.$tag.$tag_mark;
+						$tmp_str2 = str_replace($to_replace, $replace_with, $tmp_str2);
+					}
+				}
+				// Replace edited string from the news body.
+				$tmp_str = str_replace(Bank::NEWS_DISPLAY_EDITED, $tmp_str2, $tmp_str);
+				
+				// Loop through tags in the article wrapper, replace them.
+				while(Ctrl_view::findTags($article_wrapper, $tag) !== false){
+					$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser, $value);
+					$to_replace = $tag_mark.$tag.$tag_mark;
+					$tmp_str = str_replace($to_replace, $replace_with, $tmp_str);
+				}
+				$news_display_str .= $tmp_str;
+			}
+			
+			$str = str_replace(Bank::NEWS_DISPLAY, $news_display_str, $str);
+		}
+		
 		$tmp_str = $str;
 		if(isset($post[Bank::SUBMIT_EDIT_USER])) {
 			// If going in to editing another user, grab the editable users ID from the button used.

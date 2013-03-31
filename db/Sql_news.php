@@ -25,6 +25,20 @@ class Sql_news extends Sql
 	}
 	
 	/**
+	 * Function selectLatestNews
+	 * 
+	 * Function selects the id's of the latest news.
+	 * 
+	 * @author Iiro Vaahtojärvi
+	 * @return $result array
+	 */
+	public static function selectLatestNews()
+	{
+		$query = "SELECT gs_news_id FROM gs_news ORDER BY gs_news_date DESC LIMIT ".Bank::LATEST_NEWS;
+		return parent::select($query);
+	}
+	
+	/**
 	 * Function selectNewsById
 	 * 
 	 * Function selects a news article based on the article ID given.
