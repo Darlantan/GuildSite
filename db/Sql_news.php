@@ -38,6 +38,21 @@ class Sql_news extends Sql
 		$query = "SELECT * FROM gs_news WHERE gs_news_id = ".$id;
 		return parent::select($query);
 	}
+	
+	/**
+	 * Function addNews
+	 * 
+	 * Function inserts a new news article. Returns new article id.
+	 * 
+	 * @author Iiro Vaahtojärvi
+	 * @param $news object
+	 * @param $user_id int
+	 */
+	public static function addNews($news, $user_id)
+	{
+		$query = "INSERT INTO gs_news(gs_news_title, gs_news_str, gs_news_date, gs_user_id) VALUES ('".$news->getTitle()."', '".$news->getStr()."', '".$news->getTitle()."', ".$user_id.")";
+		return parent::insertWithId($query);
+	}
 }
 
 ?>

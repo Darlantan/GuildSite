@@ -220,6 +220,22 @@ class Ctrl_guildsite
 					$pid = Bank::PAGE_ID_ADMIN_EDIT_USER;
 					$view = self::lookForViewToShow($pid, $user_id);
 					break;
+				case Bank::SUBMIT_ADD_NEWS :
+					if(is_array($result)) {
+						// If $result is an array of errors
+						if($post[Bank::INPUT_NEWS_ID]) {
+							// If user was editing news
+							$pid = Bank::PAGE_ID_EDIT_NEWS;
+						} else {
+							// If user was adding news
+							$pid = Bank::PAGE_ID_ADD_NEWS;
+						}
+					} else if(is_int($result)) {
+						// If $result is int, $result is the id of submitted news.
+						$pid = Bank::PAGE_ID_NEWS_LIST;
+					}
+					$view = self::lookForViewToShow($pid, $user_id);
+					break;
 			}
 		}
 		
@@ -527,6 +543,9 @@ class Ctrl_guildsite
 				break;
 			case Bank::SUBMIT_USER_DELETE:
 				$result = Ctrl_user::deleteUser($post, $user_id);
+				break;
+			case Bank::SUBMIT_ADD_NEWS:
+				$result = Ctrl_news::modifyNewsData($post, $user_id);
 				break;
 		}
 	}

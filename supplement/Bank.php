@@ -62,6 +62,9 @@ final class Bank
 	const PAGE_ID_DEFAULT_ADMIN		= 400;
 	const PAGE_ID_ADMIN_EDIT_USER	= 401;
 	const PAGE_ID_USER_LIST			= 402;
+	const PAGE_ID_NEWS_LIST			= 410;
+	const PAGE_ID_ADD_NEWS			= 411;
+	const PAGE_ID_EDIT_NEWS			= 412;
 	
 	// Helper view ID's (from DB: gs_view_helper)
 	const VIEW_ID_ERRORTEMPLATE		= 1;
