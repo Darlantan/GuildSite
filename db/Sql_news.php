@@ -50,7 +50,7 @@ class Sql_news extends Sql
 	 */
 	public static function addNews($news, $user_id)
 	{
-		$query = "INSERT INTO gs_news(gs_news_title, gs_news_str, gs_news_date, gs_user_id) VALUES ('".$news->getTitle()."', '".$news->getStr()."', '".$news->getTitle()."', ".$user_id.")";
+		$query = "INSERT INTO gs_news(gs_news_title, gs_news_str, gs_news_date, gs_user_id) VALUES ('".$news->getTitle()."', '".$news->getStr()."', '".$news->getDate()."', ".$user_id.")";
 		return parent::insertWithId($query);
 	}
 }
