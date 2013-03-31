@@ -146,7 +146,7 @@ final class Bank
 	const NEWS_LIST					= "##NEWS_LIST##";
 	const NEWS_LIST_CONTENT			= "##NEWS_LIST_CONTENT##";
 	const NEWS_DISPLAY				= "##NEWS_DISPLAY##";
-	const NEWS_DISPLAY_EDITED		= "##NEWS_EDITED_TEMPLATE##";
+	const NEWS_DISPLAY_EDITED		= "##NEWS_TEMPLATE_EDITED##";
 	
 	// Possible values for strings inside tags (##something##)
 	const TAG_USER_ID				= "USER_ID";
