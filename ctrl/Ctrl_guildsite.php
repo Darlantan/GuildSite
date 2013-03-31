@@ -417,7 +417,7 @@ class Ctrl_guildsite
 				print($tmp_str);
 				
 				// Loop through tags in the article wrapper, replace them.
-				while(Ctrl_view::findTags($tmp_str, $tag) !== false){
+				while(Ctrl_view::findTags($article_wrapper, $tag) !== false){
 					$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser, $value);
 					$to_replace = $tag_mark.$tag.$tag_mark;
 					$tmp_str = str_replace($to_replace, $replace_with, $tmp_str);
