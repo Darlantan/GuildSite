@@ -387,19 +387,21 @@ class Ctrl_guildsite
 		if(strpos($str, Bank::NEWS_DISPLAY) !== false) {
 			// Get string for article wrapper
 			$article_wrapper = Ctrl_view::fetchHelperView(Bank::VIEW_ID_NEWS_ARTICLE_WRAPPER);
+			$article_wrapper = $article_wrapper->getViewStr();
 			$edited_wrapper = Ctrl_view::fetchHelperView(Bank::VIEW_ID_NEWS_ARTICLE_EDITED);
+			$edited_wrapper = $edited_wrapper->getViewStr();
 			$latest_news = Ctrl_news::getLatestNews();
 			
 			$news_display_str = "";
 			foreach($latest_news as $key => $value) {
 				// Set the user who posted the news
 				$edituser = $value->getAuthor();
-				$tmp_str = $article_wrapper->getViewStr();
+				$tmp_str = $article_wrapper;
 				$tmp_str2 = "";
 				
 				if($value->getEdited() != NULL) {
 					// If article has been edited, go through the editwrapper to find tags.
-					$tmp_str2 = $edited_wrapper->getViewStr();
+					$tmp_str2 = $edited_wrapper;
 					while(Ctrl_view::findTags($edited_wrapper, $tag) !== false) {
 						$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser, $value);
 						$to_replace = $tag_mark.$tag.$tag_mark;
