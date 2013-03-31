@@ -412,7 +412,7 @@ class Ctrl_guildsite
 				$tmp_str = str_replace(Bank::NEWS_DISPLAY_EDITED, $tmp_str2, $tmp_str);
 				
 				// Loop through tags in the article wrapper, replace them.
-				while(Ctrl_view::findTags($article_wrapper, $tag) !== false){
+				while(Ctrl_view::findTags($tmp_str, $tag) !== false){
 					$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser, $value);
 					$to_replace = $tag_mark.$tag.$tag_mark;
 					$tmp_str = str_replace($to_replace, $replace_with, $tmp_str);
