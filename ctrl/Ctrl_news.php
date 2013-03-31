@@ -188,7 +188,7 @@ class Ctrl_news
 		$result = array();
 		
 		foreach($ids as $key => $value) {
-			error_log($value);
+			error_log(print_r($value));
 			$result[] = self::getNewsById($value);
 		}
 		

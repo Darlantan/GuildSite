@@ -394,12 +394,12 @@ class Ctrl_guildsite
 			foreach($latest_news as $key => $value) {
 				// Set the user who posted the news
 				$edituser = $value->getAuthor();
-				$tmp_str = $article_wrapper;
+				$tmp_str = $article_wrapper->getViewStr();
 				$tmp_str2 = "";
 				
 				if($value->getEdited() != NULL) {
 					// If article has been edited, go through the editwrapper to find tags.
-					$tmp_str2 = $edited_wrapper;
+					$tmp_str2 = $edited_wrapper->getViewStr();
 					while(Ctrl_view::findTags($edited_wrapper, $tag) !== false) {
 						$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser, $value);
 						$to_replace = $tag_mark.$tag.$tag_mark;
