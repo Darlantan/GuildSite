@@ -46,6 +46,7 @@ final class Bank
 	const USERNAME_MIN_LENGTH		= 3;
 	const USERNAME_MAX_LENGTH		= 25;
 	const ALLOW_EDIT_USER_LEVEL		= 3; // Allow Moderators and up to edit other users
+	const TITLE_TRUNCATE			= 50; // If news article title is longer than this, truncate for lists etc
 	
 	// Page ID's (from DB: gs_view)
 	const PAGE_ID_FRONTPAGE			= 1;

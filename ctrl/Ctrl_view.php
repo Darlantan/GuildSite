@@ -127,6 +127,11 @@ class Ctrl_view
 			$article = Ctrl_news::getNewsById($value["gs_news_id"]);
 			$str .= $news_list_view->getViewStr();
 			
+			// Substring the title to specified limit.
+			if(len($article->getTitle()) > Bank::TITLE_TRUNCATE) {
+				$article->setTitle(substr($article->getTitle(), 0, Bank::TITLE_TRUNCATE)."...");
+			}
+			
 			$tmp_str = $str;
 			while(self::findTags($tmp_str, $tag) !== false){
 				$replace_with = self::replaceContent($tag, $article->getAuthor(), false, $article);
