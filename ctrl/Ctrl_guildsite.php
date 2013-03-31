@@ -379,11 +379,16 @@ class Ctrl_guildsite
 			// If Edit user form has been submitted but the page is requested again (in case of error), get edited user from $post.
 			$edituser = Ctrl_user::getUserById($post[Bank::INPUT_USER_ID]);
 		} else {
+			// Else initialize edituser variable
 			$edituser = array();
 		}
-		if(isset($post[Bank::INPUT_NEWS_ID])) {
-			$article = Ctrl_news::getNewsById($post[Bank::INPUT_NEWS_ID]);
+		
+		if(isset($post[Bank::SUBMIT_GO_EDIT_NEWS])) {
+			// If going to edit a news article, grab the editable news ID from the button used.
+			// TODO: Figure out a better way, now "value" attribute for the button has to be ##NEWS_ID##.. 
+			$article = Ctrl_news::getNewsById($post[Bank::SUBMIT_GO_EDIT_NEWS]);
 		} else {
+			// Else initialize article variable
 			$article = new News();
 		}
 		// Find all the rest of the tags and replace them with required content.
