@@ -11,12 +11,15 @@ General:
 [ ] Option to stay logged in permanently (with cookie)
 	[ ] Do other cookie stuff as well.
 [ ] Newsfeed
-	[ ] Insert news
+	[x] Insert news
 	[ ] Edit news
 	[ ] Delete news
 	[ ] Wysiwyg
 [ ] Newsfeed comment system
 [ ] Forgot password
+[ ] Figure out a way to do if else tags in the layouts and / or views.
+	[ ] Pids
+	[ ] User levels
 
 [ ] Success messages in addition to error messages
 [ ] Critical / unauthorized error logging in a mysql table.
