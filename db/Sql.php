@@ -6,6 +6,7 @@
  * Control class for basic SQL functionality. Database operations are handled through this class.
  * 
  * Most errors will be logged with error_log. On my server that means /var/log/php_errors.log
+ * All queries will also be logged in the same log.
  * 
  * @author Iiro Vaahtojärvi
  * @copyright Iiro Vaahtojärvi
@@ -54,6 +55,7 @@ class Sql
 	 */
 	public static function select($query)
 	{
+		error_log($query);
 		$sql = mysql_query($query);
 		if($sql !== false && $sql !== true) {
 			// If query returns result set
@@ -90,6 +92,7 @@ class Sql
 	 */
 	public static function insert($query)
 	{
+		error_log($query);
 		$sql = mysql_query($query);
 		if($sql !== false) {
 			return $sql;
@@ -110,6 +113,7 @@ class Sql
 	 */
 	public static function insertWithId($query)
 	{
+		error_log($query);
 		$sql = mysql_query($query);
 		if($sql !== false) {
 			return mysql_insert_id(); // Note: This is based on the last performed query, needs to be run right after the query itself to avoid wrong id's.
@@ -130,6 +134,7 @@ class Sql
 	 */
 	public static function delete($query)
 	{
+		error_log($query);
 		$sql = mysql_query($query);
 		if($sql !== false) {
 			return $sql;
@@ -150,6 +155,7 @@ class Sql
 	 */
 	public static function update($query)
 	{
+		error_log($query);
 		$sql = mysql_query($query);
 		if($sql !== false) {
 			return $sql;

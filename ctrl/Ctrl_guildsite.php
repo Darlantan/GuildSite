@@ -236,6 +236,10 @@ class Ctrl_guildsite
 					}
 					$view = self::lookForViewToShow($pid, $user_id);
 					break;
+				case Bank::SUBMIT_GO_EDIT_NEWS :
+					$pid = Bank::PAGE_ID_EDIT_NEWS;
+					$view = self::lookForViewToShow($pid, $user_id);
+					break;
 			}
 		}
 		
