@@ -129,7 +129,7 @@ class Ctrl_view
 			
 			// Substring the title to specified limit.
 			if(strlen($article->getTitle()) > Bank::TITLE_TRUNCATE) {
-				$article->setTitle(Ctrl_news::truncateTitle($article->getTitle));
+				$article->setTitle(Ctrl_news::truncateTitle($article->getTitle()));
 			}
 			
 			$tmp_str = $str;
