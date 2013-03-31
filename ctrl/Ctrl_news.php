@@ -39,13 +39,14 @@ class Ctrl_news
 				return $errors;
 			}
 			
+			$log_title = $editnews->getTitle();
 			if(strlen($editnews->getTitle()) > Bank::TITLE_TRUNCATE) {
-				$short_title = self::truncateTitle($editnews->getTitle());
+				$log_title = self::truncateTitle($editnews->getTitle());
 			}
 			
 			// Log the add
 			$log_type = Bank::LOG_TYPE_NEWS_EDITED;
-			$log_info = Bank::LOG_INFO_NEWS_EDITED.$short_title;
+			$log_info = Bank::LOG_INFO_NEWS_EDITED.$log_title;
 			Ctrl_log::createLogEvent($user->getId(), $log_type, $log_info);
 			
 			$editnews->setTitle($title);
@@ -73,13 +74,14 @@ class Ctrl_news
 			$editnews->setAuthor($user->getId());
 			$editnews->setDate(date("Y-m-d H:i:s"));
 			
+			$log_title = $editnews->getTitle();
 			if(strlen($editnews->getTitle()) > Bank::TITLE_TRUNCATE) {
-				$short_title = self::truncateTitle($editnews->getTitle());
+				$log_title = self::truncateTitle($editnews->getTitle());
 			}
 			
 			// Log the add
 			$log_type = Bank::LOG_TYPE_NEWS_ADDED;
-			$log_info = Bank::LOG_INFO_NEWS_ADDED.$short_title;
+			$log_info = Bank::LOG_INFO_NEWS_ADDED.$log_title;
 			Ctrl_log::createLogEvent($user->getId(), $log_type, $log_info);
 			
 			return Sql_news::addNews($editnews, $user->getId());
