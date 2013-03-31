@@ -24,9 +24,35 @@ class Ctrl_news
 	{
 		$user = Ctrl_user::getUserById($user_id);
 		
-		if($post[Bank::INPUT_NEWS_ID]) {
+		if($post[Bank::SUBMIT_EDIT_NEWS]) {
 			// If ID is sent, modify existing news article
 			$editnews = self::getNewsById($post[Bank::INPUT_NEWS_ID]);
+			
+			$title = $post[Bank::INPUT_NEWS_TITLE];
+			$str = $post[Bank::INPUT_NEWS_STR];
+			$errors = array();
+			
+			self::parseNewsItem($title, $str, $errors);
+			
+			if(!empty($errors)) {
+				// If errors, return them
+				return $errors;
+			}
+			
+			if(strlen($editnews->getTitle()) > Bank::TITLE_TRUNCATE) {
+				$short_title = self::truncateTitle($editnews->getTitle());
+			}
+			
+			// Log the add
+			$log_type = Bank::LOG_TYPE_NEWS_EDITED;
+			$log_info = Bank::LOG_INFO_NEWS_EDITED.$short_title;
+			Ctrl_log::createLogEvent($user->getId(), $log_type, $log_info);
+			
+			$editnews->setTitle($title);
+			$editnews->setStr($str);
+			$editnews->setEdited(date("Y-m-d H:i:s"));
+			
+			return Sql_news::editNews($editnews);
 		} else {
 			// If ID is not sent, news article is new.
 			$editnews = new News();
@@ -47,9 +73,45 @@ class Ctrl_news
 			$editnews->setAuthor($user->getId());
 			$editnews->setDate(date("Y-m-d H:i:s"));
 			
+			if(strlen($editnews->getTitle()) > Bank::TITLE_TRUNCATE) {
+				$short_title = self::truncateTitle($editnews->getTitle());
+			}
+			
+			// Log the add
+			$log_type = Bank::LOG_TYPE_NEWS_ADDED;
+			$log_info = Bank::LOG_INFO_NEWS_ADDED.$short_title;
+			Ctrl_log::createLogEvent($user->getId(), $log_type, $log_info);
+			
 			return Sql_news::addNews($editnews, $user->getId());
 		}
 		
+	}
+	
+	/**
+	 * Function deleteNews
+	 * 
+	 * Function deletes the specified news article.
+	 * 
+	 * @author Iiro Vaahtojärvi
+	 * @param $post array
+	 * @param $user_id int
+	 * @return $result
+	 */
+	public static function deleteNews($post, $user_id)
+	{
+		$user = Ctrl_user::getUserById($user_id);
+		$deletenews = Ctrl_news::getNewsById($post[Bank::INPUT_NEWS_ID]);
+		
+		if(strlen($deletenews->getTitle()) > Bank::TITLE_TRUNCATE) {
+			$deletenews->setTitle(self::truncateTitle($deletenews->getTitle()));
+		}
+		
+		// Log the delete
+		$log_type = Bank::LOG_TYPE_NEWS_DELETED;
+		$log_info = Bank::LOG_INFO_NEWS_DELETED.$deletenews->getTitle();
+		Ctrl_log::createLogEvent($user->getId(), $log_type, $log_info);
+		
+		return Sql_news::deleteNews($deletenews);
 	}
 	
 	/**
@@ -67,6 +129,18 @@ class Ctrl_news
 		// Escape the string for mysql.
 		$title = mysql_real_escape_string($title);
 		$str = mysql_real_escape_string($str);
+	}
+	
+	/**
+	 * Function truncateTitle
+	 * 
+	 * @author Iiro Vaahtojärvi
+	 * @param $title str
+	 * @return $title str
+	 */
+	public static function truncateTitle($title)
+	{
+		$title = substr($title, 0, Bank::TITLE_TRUNCATE)."...";
 	}
 	
 	/**

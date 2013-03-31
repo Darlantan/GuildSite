@@ -108,6 +108,9 @@ final class Bank
 	const LOG_TYPE_USER_DELETED		= 101;
 	const LOG_TYPE_USER_UPDATED_BY_ADMIN	= 400;
 	const LOG_TYPE_USER_DELETED_BY_ADMIN	= 401;
+	const LOG_TYPE_NEWS_ADDED		= 411;
+	const LOG_TYPE_NEWS_EDITED		= 412;
+	const LOG_TYPE_NEWS_DELETED		= 413;
 	
 	// Log info strings
 	const LOG_INFO_USER_LOGIN		= "User logged in successfully from IP: ";
@@ -123,6 +126,9 @@ final class Bank
 	const LOG_INFO_USER_DELETED		= "User deleted: ";
 	const LOG_INFO_USER_UPDATED_BY_ADMIN	= "User updated by admin: ";
 	const LOG_INFO_USER_DELETED_BY_ADMIN	= "User deleted by admin: ";
+	const LOG_INFO_NEWS_ADDED		= "News article added: ";
+	const LOG_INFO_NEWS_EDITED		= "News article edited: ";
+	const LOG_INFO_NEWS_DELETED		= "News article deleted: ";
 	
 	
 	// System reserved tags

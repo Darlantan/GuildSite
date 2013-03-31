@@ -53,6 +53,34 @@ class Sql_news extends Sql
 		$query = "INSERT INTO gs_news(gs_news_title, gs_news_str, gs_news_date, gs_user_id) VALUES ('".$news->getTitle()."', '".$news->getStr()."', '".$news->getDate()."', ".$user_id.")";
 		return parent::insertWithId($query);
 	}
+	
+	/**
+	 * Function editNews
+	 * 
+	 * Function updates gs_news.
+	 * 
+	 * @author Iiro Vaahtojärvi
+	 * @param $news object
+	 */
+	public static function editNews($news)
+	{
+		$query = "UPDATE gs_news SET gs_news_title = '".$news->getTitle()."', gs_news_str = '".$news->getStr()."', gs_news_date_edited = '".$news->getEdited()."' WHERE gs_news_id = ".$news->getId();
+		return parent::update($query);
+	}
+	
+	/**
+	 * Function deleteNews
+	 * 
+	 * Function deletes specified row from gs_news.
+	 * 
+	 * @author Iiro Vaahtojärvi
+	 * @param $news object
+	 */
+	public static function deleteNews($news)
+	{
+		$query = "DELETE FROM gs_news WHERE gs_news_id = ".$news->getId();
+		return parent::delete($query);
+	}
 }
 
 ?>
