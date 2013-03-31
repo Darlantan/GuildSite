@@ -392,6 +392,9 @@ class Ctrl_guildsite
 			$edited_wrapper = $edited_wrapper->getViewStr();
 			$latest_news = Ctrl_news::getLatestNews();
 			
+			print($article_wrapper);
+			print($edited_wrapper);
+			
 			$news_display_str = "";
 			foreach($latest_news as $key => $value) {
 				// Set the user who posted the news
@@ -406,18 +409,22 @@ class Ctrl_guildsite
 						$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser, $value);
 						$to_replace = $tag_mark.$tag.$tag_mark;
 						$tmp_str2 = str_replace($to_replace, $replace_with, $tmp_str2);
+						print($tmp_str2);
 					}
 				}
 				// Replace edited string from the news body.
 				$tmp_str = str_replace(Bank::NEWS_DISPLAY_EDITED, $tmp_str2, $tmp_str);
+				print($tmp_str);
 				
 				// Loop through tags in the article wrapper, replace them.
 				while(Ctrl_view::findTags($tmp_str, $tag) !== false){
 					$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser, $value);
 					$to_replace = $tag_mark.$tag.$tag_mark;
 					$tmp_str = str_replace($to_replace, $replace_with, $tmp_str);
+					print($tmp_str);
 				}
 				$news_display_str .= $tmp_str;
+				print($news_display_str);
 			}
 			
 			$str = str_replace(Bank::NEWS_DISPLAY, $news_display_str, $str);
