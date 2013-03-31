@@ -141,6 +141,7 @@ class Ctrl_news
 	public static function truncateTitle($title)
 	{
 		$title = substr($title, 0, Bank::TITLE_TRUNCATE)."...";
+		return $title;
 	}
 	
 	/**
