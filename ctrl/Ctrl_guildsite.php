@@ -377,10 +377,15 @@ class Ctrl_guildsite
 		} else {
 			$edituser = array();
 		}
+		if(isset($post[Bank::INPUT_NEWS_ID])) {
+			$article = Ctrl_news::getNewsById($post[Bank::INPUT_NEWS_ID]);
+		} else {
+			$article = new News();
+		}
 		// Find all the rest of the tags and replace them with required content.
 		
 		while(Ctrl_view::findTags($tmp_str, $tag) !== false) {
-			$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser,false);
+			$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser, $article);
 			
 			$to_replace = $tag_mark.$tag.$tag_mark;
 			
