@@ -392,6 +392,8 @@ class Ctrl_guildsite
 			$edited_wrapper = $edited_wrapper->getViewStr();
 			$latest_news = Ctrl_news::getLatestNews();
 			
+			print_r($latest_news);
+			
 			$news_display_str = "";
 			foreach($latest_news as $key => $value) {
 				// Set the user who posted the news
