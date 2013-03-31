@@ -7,6 +7,7 @@
  * 
  * Most errors will be logged with error_log. On my server that means /var/log/php_errors.log
  * All queries will also be logged in the same log.
+ * // TODO: Figure out a better way to log mysql queries. This is not good if there's a lot of traffic...
  * 
  * @author Iiro Vaahtojärvi
  * @copyright Iiro Vaahtojärvi
