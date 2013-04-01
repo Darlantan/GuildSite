@@ -403,7 +403,7 @@ class Ctrl_guildsite
 				$tmp_str = $article_wrapper;
 				$tmp_str2 = "";
 				
-				if($value->getEdited() != NULL) {
+				if($latest_news[0]->getEdited() != NULL) {
 					// If article has been edited, go through the editwrapper to find tags.
 					$tmp_str2 = $edited_wrapper;
 					while(Ctrl_view::findTags($edited_wrapper, $tag) !== false) {
