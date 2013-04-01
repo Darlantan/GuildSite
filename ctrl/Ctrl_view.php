@@ -66,10 +66,10 @@ class Ctrl_view
 				$replace_with = $article->getStr();
 				break;
 			case Bank::TAG_NEWS_DATE:
-				$replace_with = $article->getDate();
+				$replace_with = date(DATE_RFC822, $article->getDate());
 				break;
 			case Bank::TAG_NEWS_EDITED:
-				$replace_with = $article->getEdited();
+				$replace_with = date(DATE_RFC822, $article->getEdited());
 				break;
 		}
 		
