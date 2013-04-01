@@ -385,11 +385,7 @@ class Ctrl_guildsite
 		
 		// If content news display tag is found
 		if(strpos($str, Bank::NEWS_DISPLAY) !== false) {
-			// Get string for article wrapper
-			$article_wrapper = Ctrl_view::fetchHelperView(Bank::VIEW_ID_NEWS_ARTICLE_WRAPPER);
-			$article_wrapper = $article_wrapper->getViewStr();
-			$edited_wrapper = Ctrl_view::fetchHelperView(Bank::VIEW_ID_NEWS_ARTICLE_EDITED);
-			$edited_wrapper = $edited_wrapper->getViewStr();
+			
 			$latest_news = Ctrl_news::getLatestNews();
 			
 			print($article_wrapper);
@@ -398,6 +394,12 @@ class Ctrl_guildsite
 			$news_display_str = "";
 			$news_len = count($latest_news);
 			for($i = 0; $i < $news_len; $i++) {
+				// Get string for article wrapper
+				$article_wrapper = Ctrl_view::fetchHelperView(Bank::VIEW_ID_NEWS_ARTICLE_WRAPPER);
+				$article_wrapper = $article_wrapper->getViewStr();
+				$edited_wrapper = Ctrl_view::fetchHelperView(Bank::VIEW_ID_NEWS_ARTICLE_EDITED);
+				$edited_wrapper = $edited_wrapper->getViewStr();
+				
 				// Set the user who posted the news
 				$edituser = $latest_news[$i]->getAuthor();
 				$tmp_str = $article_wrapper;
