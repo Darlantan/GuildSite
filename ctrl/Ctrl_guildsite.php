@@ -385,11 +385,7 @@ class Ctrl_guildsite
 		
 		// If content news display tag is found
 		if(strpos($str, Bank::NEWS_DISPLAY) !== false) {
-			
 			$latest_news = Ctrl_news::getLatestNews();
-			
-			//print($article_wrapper);
-			//print($edited_wrapper);
 			
 			$news_display_str = "";
 			$news_len = count($latest_news);
@@ -412,24 +408,18 @@ class Ctrl_guildsite
 						$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser, $latest_news[$i]);
 						$to_replace = $tag_mark.$tag.$tag_mark;
 						$tmp_str2 = str_replace($to_replace, $replace_with, $tmp_str2);
-						//print("tmp str 2: ".$tmp_str2);
 					}
 				}
 				// Replace edited string from the news body.
 				$tmp_str = str_replace(Bank::NEWS_DISPLAY_EDITED, $tmp_str2, $tmp_str);
-				//print("tmp str: ".$tmp_str);
 				
 				// Loop through tags in the article wrapper, replace them.
 				while(Ctrl_view::findTags($article_wrapper, $tag) !== false){
 					$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser, $latest_news[$i]);
 					$to_replace = $tag_mark.$tag.$tag_mark;
 					$tmp_str = str_replace($to_replace, $replace_with, $tmp_str);
-					//print("tmp str: ".$tmp_str);
 				}
 				$news_display_str .= $tmp_str;
-				//print("News display str: ".$news_display_str);
-				//print("Article wrapper: ".$article_wrapper);
-				//print("Edited wrapper: ".$edited_wrapper);
 			}
 			
 			$str = str_replace(Bank::NEWS_DISPLAY, $news_display_str, $str);

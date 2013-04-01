@@ -68,6 +68,9 @@ class Ctrl_view
 			case Bank::TAG_NEWS_DATE:
 				$replace_with = $article->getDate();
 				break;
+			case Bank::TAG_NEWS_EDITED:
+				$replace_with = $article->getEdited();
+				break;
 		}
 		
 		return $replace_with;
