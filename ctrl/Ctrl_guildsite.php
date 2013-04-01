@@ -396,9 +396,10 @@ class Ctrl_guildsite
 			print($edited_wrapper);
 			
 			$news_display_str = "";
-			foreach($latest_news as $key => $value) {
+			$news_len = count($latest_news);
+			for($i = 0; $i < $news_len; $i++) {
 				// Set the user who posted the news
-				$edituser = $value->getAuthor();
+				$edituser = $latest_news[0]->getAuthor();
 				$tmp_str = $article_wrapper;
 				$tmp_str2 = "";
 				
@@ -406,7 +407,7 @@ class Ctrl_guildsite
 					// If article has been edited, go through the editwrapper to find tags.
 					$tmp_str2 = $edited_wrapper;
 					while(Ctrl_view::findTags($edited_wrapper, $tag) !== false) {
-						$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser, $value);
+						$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser, $latest_news[0]);
 						$to_replace = $tag_mark.$tag.$tag_mark;
 						$tmp_str2 = str_replace($to_replace, $replace_with, $tmp_str2);
 						print($tmp_str2);
@@ -418,13 +419,15 @@ class Ctrl_guildsite
 				
 				// Loop through tags in the article wrapper, replace them.
 				while(Ctrl_view::findTags($article_wrapper, $tag) !== false){
-					$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser, $value);
+					$replace_with = Ctrl_view::replaceContent($tag, $user, $edituser, $latest_news[0]);
 					$to_replace = $tag_mark.$tag.$tag_mark;
 					$tmp_str = str_replace($to_replace, $replace_with, $tmp_str);
 					print($tmp_str);
 				}
 				$news_display_str .= $tmp_str;
 				print($news_display_str);
+				print($article_wrapper);
+				print($edited_wrapper);
 			}
 			
 			$str = str_replace(Bank::NEWS_DISPLAY, $news_display_str, $str);
